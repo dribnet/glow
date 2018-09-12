@@ -6,11 +6,35 @@ import os
 import sys
 import time
 
-import horovod.tensorflow as hvd
 import numpy as np
 import tensorflow as tf
 import graphics
 from utils import ResultLogger
+
+try:
+    import horovod.tensorflow as hvd
+except ImportError:
+    class hvd:
+        @staticmethod
+        def rank():
+            return 0
+
+        @staticmethod
+        def size():
+            return 1
+
+        @staticmethod
+        def local_rank():
+            return 0
+
+        @staticmethod
+        def init():
+            pass
+
+        @staticmethod
+        def broadcast_global_variables(junk):
+            return tf.no_op()
+
 
 learn = tf.contrib.learn
 

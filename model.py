@@ -3,8 +3,11 @@ import tensorflow as tf
 import tfops as Z
 import optim
 import numpy as np
-import horovod.tensorflow as hvd
 from tensorflow.contrib.framework.python.ops import add_arg_scope
+try:
+    import horovod.tensorflow as hvd
+except ImportError:
+    from train import hvd
 
 
 '''

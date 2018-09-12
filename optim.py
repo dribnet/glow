@@ -1,6 +1,9 @@
 import tensorflow as tf
 import tfops as Z
-import horovod.tensorflow as hvd
+try:
+    import horovod.tensorflow as hvd
+except ImportError:
+    from train import hvd
 
 # Optimizers
 
